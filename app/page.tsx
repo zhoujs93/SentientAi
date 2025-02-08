@@ -118,24 +118,25 @@ export default function ChatPage() {
 
   const renderStrategies = (strategies: Strategy[]) => {
     return strategies.map((strategy, index) => (
-      <Card key={`strategy-${index+1}`} className="w-60 min-w-[200px] shadow-md">
-      <div className="p-4">
-        <h3 className="font-semibold text-sm">{strategy.name}</h3>
-        <div className="text-gray-700 font-semibold flex justify-between gap-1 items-center">
-          {strategy.symbol}
-          <Image
-            src={cryptoLogos[strategy.symbol]}
-            alt={strategy.symbol}
-            width={16}
-            height={24}
-            className="object-contain h-10"
-          />
+      <Card key={`strategy-${index + 1}`} className="w-60 min-w-[200px] shadow-md">
+        <div className="p-4">
+          <h3 className="font-semibold text-sm">{strategy.name}</h3>
+          <div className="text-gray-700 font-semibold flex justify-between gap-1 items-center">
+            {strategy.symbol}
+            <Image
+              src={cryptoLogos[strategy.symbol]}
+              alt={strategy.symbol}
+              width={16}
+              height={24}
+              className="object-contain h-10"
+            />
+          </div>
+          <p className="text-gray-500">{strategy.returns}%</p>
+          <p className="text-gray-500">Minimum: {strategy.minimumAmount} {strategy.symbol}</p>
         </div>
-        <p className="text-gray-500">{strategy.returns}%</p>
-        <p className="text-gray-500">Minimum: {strategy.minimumAmount} {strategy.symbol}</p>
-      </div>
-    </Card>
-  ))
+      </Card>
+    ))
+  }
 
   const renderText = (text: any) => {
     return <div>{text}</div>
@@ -168,10 +169,11 @@ export default function ChatPage() {
         {messages.map((message, index) => (
           <div key={index} className="whitespace-pre-wrap">
             {message.role === "user" ? "> " : ""}
-            {message.type === "text" ?  renderText(message.content) : 
+            {message.type === "text" ? renderText(message.content) :
               <div className="flex overflow-x-auto space-x-4 p-2">
                 {renderStrategies(message.content as any[])}
               </div>
+
             }
           </div>
         ))}
