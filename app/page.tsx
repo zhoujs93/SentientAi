@@ -18,9 +18,12 @@ interface Strategy {
   id: string
   name: string
   description: string
+  symbol: string
+  minimumAmount: number
+  returns: number
 }
 
-const cryptoLogos = {
+const cryptoLogos: any = {
   "BTC": "https://cryptologos.cc/logos/bitcoin-btc-logo.svg",
   "ETH": "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
   "ADA": "https://cryptologos.cc/logos/cardano-ada-logo.svg",
@@ -112,6 +115,31 @@ export default function ChatPage() {
     }, 50) // Adjust typing speed here
   }
 
+
+  const renderStrategies = (strategies: Strategy[]) => {
+    return strategies.map((strategy, index) => (
+      <Card key={`strategy-${index+1}`} className="w-60 min-w-[200px] shadow-md">
+      <div className="p-4">
+        <h3 className="font-semibold text-sm">{strategy.name}</h3>
+        <div className="text-gray-700 font-semibold flex justify-between gap-1 items-center">
+          {strategy.symbol}
+          <Image
+            src={cryptoLogos[strategy.symbol]}
+            alt={strategy.symbol}
+            width={16}
+            height={24}
+            className="object-contain h-10"
+          />
+        </div>
+        <p className="text-gray-500">{strategy.returns}%</p>
+        <p className="text-gray-500">Minimum: {strategy.minimumAmount} {strategy.symbol}</p>
+      </div>
+    </Card>
+  ))
+
+  const renderText = (text: any) => {
+    return <div>{text}</div>
+  }
   return (
     <div className="max-w-4xl w-full mx-auto flex flex-col h-[calc(100vh-140px)]">
       {/* Chat Header */}
@@ -140,31 +168,11 @@ export default function ChatPage() {
         {messages.map((message, index) => (
           <div key={index} className="whitespace-pre-wrap">
             {message.role === "user" ? "> " : ""}
-            {message.type === "text" ? (
-              message.content
-            ) : (
+            {message.type === "text" ?  renderText(message.content) : 
               <div className="flex overflow-x-auto space-x-4 p-2">
-                {(message.content as any[]).map((strategy) => (
-                  <Card key={strategy.id} className="w-60 min-w-[200px] shadow-md">
-                    <div className="p-4">
-                      <h3 className="font-semibold text-sm">{strategy.name}</h3>
-                      <div className="text-gray-700 font-semibold flex justify-between gap-1 items-center">
-                        {strategy.symbol}
-                        <Image
-                          src={cryptoLogos[strategy.symbol]}
-                          alt={strategy.symbol}
-                          width={16}
-                          height={24}
-                          className="object-contain h-10"
-                        />
-                      </div>
-                      <p className="text-gray-500">{strategy.returns}%</p>
-                      <p className="text-gray-500">Minimum: {strategy.minimumAmount} {strategy.symbol}</p>
-                    </div>
-                  </Card>
-                ))}
+                {renderStrategies(message.content as any[])}
               </div>
-            )}
+            }
           </div>
         ))}
 
