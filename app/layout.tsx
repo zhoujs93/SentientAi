@@ -5,17 +5,11 @@ import { StatusBar } from "@/components/status-bar"
 import type React from "react"
 import Link from "next/link"
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
 import { IBM_Plex_Mono} from 'next/font/google'
 import "./globals.css";
 
-const dotoBold = localFont({
-  src: "./fonts/Doto_Rounded-Black.ttf",
-});
 
-const pixelTimes = localFont({
-  src: "./fonts/Pixel-Times.ttf",
-});
 
 const ibm = IBM_Plex_Mono({
   weight: ['100', '200', '300', '400', '500', '600', '700'],

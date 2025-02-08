@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import { useState, useEffect, useRef } from "react"
@@ -5,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Eye, ArrowUp } from "lucide-react"
 import Image from "next/image"
 import { useWallet } from "@suiet/wallet-kit"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 
 interface Message {
   role: "user" | "assistant"
