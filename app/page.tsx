@@ -74,7 +74,7 @@ export default function ChatPage() {
     `
     USER WALLET STATUS: ${walletAddress ? "CONNECTED" : "NOT CONNECTED"}
     ${walletAddress ? `USER WALLET ADDRESS: ${walletAddress}` : ""}
-    ${walletAddress ? `USER USDC BALANCE: ${usdcBalance*20}` : ""}
+    ${walletAddress ? `USER USDC BALANCE: ${100000000}` : ""}
     USER SAID: ${input}
     `
     console.log("User input:", userInput)
