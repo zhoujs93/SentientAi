@@ -41,6 +41,9 @@ export async function POST(req: Request) {
     console.log(JSON.stringify(completion, null, 2))
     
     let isFunctionCall = false
+    if (tool_call) {
+      isFunctionCall = true
+    }
     let type = "text"
     if (content.includes("<|python_tag|>")) {
       content = content.replace("<|python_tag|>", "").trim()
@@ -95,20 +98,17 @@ export async function POST(req: Request) {
           //   content: ''
           // }
           msgObj.content = JSON.stringify(strats, null, 2)
-
-          content: JSON.stringify(strats, null, 2)
           const newMsgs = [...msgs, message, msgObj]
-          console.log('newMsgs', newMsgs)
           const newCompletion = await startCompletion({ messages: newMsgs, tools })
           content = newCompletion.choices[0]?.message?.content || ""
           console.log('newCompletion', JSON.stringify(newCompletion, null, 2))
           break
         case "startStrategy":
-          const { strategyId, amount, takeProfitThreshold, stopLossThreshold } = content.function.arguments
-          const { message: outputmsg, privateKey, publicKey} = await Strategies.startStrategy({ strategyId, amount:  Number(amount), takeProfitThreshold, stopLossThreshold })
+          const { strategyId, amount, takeProfitThreshold, stopLossThreshold, walletPrivateKey, walletPublicKey, walletSecretKey } = JSON.parse(content.function.arguments)
+          console.log(strategyId, amount, takeProfitThreshold, stopLossThreshold, walletPrivateKey, walletPublicKey, walletSecretKey)
+          const { message: outputmsg, privateKey, publicKey} = await Strategies.startStrategy({ strategyId, amount:  amount, takeProfitThreshold: takeProfitThreshold, stopLossThreshold: stopLossThreshold, walletPrivateKey, walletPublicKey, walletSecretKey })
           msgObj.content = JSON.stringify({ outputmsg, privateKey, publicKey }, null, 2)
           const newMsgs2 = [...msgs, message, msgObj]
-          console.log('newMsgs2', newMsgs2)
           const newCompletion2 = await startCompletion({ messages: newMsgs2, tools })
           content = newCompletion2.choices[0]?.message?.content || ""
           console.log('newCompletion2', JSON.stringify(newCompletion2, null, 2))  
@@ -116,7 +116,10 @@ export async function POST(req: Request) {
           break
         case "createWallet":
           content = await createSuiWallet()
-          
+          msgObj.content = JSON.stringify(content, null, 2)
+          const newMsgs3 = [...msgs, message, msgObj]
+          const newCompletion3 = await startCompletion({ messages: newMsgs3, tools })
+          content = newCompletion3.choices[0]?.message?.content || ""
           type = "text"
           break
         case "stopStrategy":
