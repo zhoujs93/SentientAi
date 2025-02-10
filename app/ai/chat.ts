@@ -15,13 +15,13 @@ interface StartCompletionProps {
 const startCompletion: (props: StartCompletionProps) => Promise<any> = async ({ messages, tools = []}) => {
     try {
         const openai = new OpenAI({
-            baseURL: "https://api.atoma.network/v1",
-            apiKey: process.env.ATOMA_API_KEY,
-            // apiKey: process.env.OPENAI_API_KEY,
+            // baseURL: "https://api.atoma.network/v1",
+            // apiKey: process.env.ATOMA_API_KEY,
+            apiKey: process.env.OPENAI_API_KEY,
         })
     const obj: any = {
-        model: "meta-llama/Llama-3.3-70B-Instruct", // Changed from gpt-4o to gpt-4
-        // model: "gpt-4o-mini",
+        // model: "meta-llama/Llama-3.3-70B-Instruct", // Changed from gpt-4o to gpt-4
+        model: "gpt-4o-mini",
         messages: messages,
         tool_choice: "auto", 
         tools: tools.map((tool: any) => ({ ...tool, type: "function" })),
