@@ -30,7 +30,7 @@ class Strategies {
                 take_profit: takeProfitThreshold,
                 stop_loss: stopLossThreshold,
             }
-            console.log("Request body:", reqBody);
+            console.log("Request body:", reqBody, strategyId);
             const startStrat = await axios.post("http://34.69.234.196:9001/run-strategy", reqBody);
             return {
                 message: startStrat.data.message,
