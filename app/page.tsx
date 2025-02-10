@@ -3,10 +3,11 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Input } from "@/components/ui/input"
-import { Eye, ArrowUp } from "lucide-react"
+
 import Image from "next/image"
 import { useWallet } from "@suiet/wallet-kit"
-import { Card } from "@/components/ui/card"
+import { ArrowUp } from "lucide-react"
+import { getWalletBalance } from "./sui/client"
 
 interface Message {
   role: "user" | "assistant"
@@ -40,13 +41,21 @@ const cryptoLogos: any = {
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
+  const [usdcBalance, setUsdcBalance] = useState<number>(0)
   const [isLoading, setIsLoading] = useState(false)
   const wallet = useWallet()
   const [error, setError] = useState<string | null>(null)
   const [currentTypingMessage, setCurrentTypingMessage] = useState<string | null>(null)
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
+  const getUSDCBalance = async () => {
+    const balance = await getWalletBalance(wallet.address as string)
+    setUsdcBalance(balance)
+  }
 
+  useEffect(() => {
+    if (wallet && wallet.connected) getUSDCBalance()
+  }, [wallet.connected])
   // Function to scroll to the latest message
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -61,7 +70,13 @@ export default function ChatPage() {
     setIsLoading(true)
     setError(null)
     const walletAddress = wallet?.account?.address
-    const userInput = `${input} ${walletAddress ? `--wallet-address ${walletAddress}` : "--user-wallet-not-connected"}`
+    const userInput = 
+    `
+    USER WALLET STATUS: ${walletAddress ? "CONNECTED" : "NOT CONNECTED"}
+    ${walletAddress ? `USER WALLET ADDRESS: ${walletAddress}` : ""}
+    ${walletAddress ? `USER USDC BALANCE: ${usdcBalance}` : ""}
+    USER SAID: ${input}
+    `
     console.log("User input:", userInput)
     const userMessage: Message = { role: "user", content: userInput, type: "text" }
     const conversationMessage: Message = { role: "user", content: input, type: "text" }
@@ -112,13 +127,13 @@ export default function ChatPage() {
         setMessages((prev) => [...prev, { role: "assistant", content: fullMessage, type: "text" }])
         setCurrentTypingMessage(null)
       }
-    }, 50) // Adjust typing speed here
+    }, 10) // Adjust typing speed here
   }
 
 
   const renderStrategies = (strategies: Strategy[]) => {
     return strategies.map((strategy, index) => (
-      <Card key={`strategy-${index + 1}`} className="w-60 min-w-[200px] shadow-md">
+      <div key={`strategy-${index + 1}`} className="w-60 min-w-[200px] shadow-sm border">
         <div className="p-4">
           <h3 className="font-semibold text-sm">{strategy.name}</h3>
           <div className="text-gray-700 font-semibold flex justify-between gap-1 items-center">
@@ -134,7 +149,7 @@ export default function ChatPage() {
           <p className="text-gray-500">{strategy.returns}%</p>
           <p className="text-gray-500">Minimum: {strategy.minimumAmount} {strategy.symbol}</p>
         </div>
-      </Card>
+      </div>
     ))
   }
 
@@ -145,25 +160,16 @@ export default function ChatPage() {
     <div className="max-w-4xl w-full mx-auto flex flex-col h-[calc(100vh-140px)]">
       {/* Chat Header */}
       <div className="border-b flex items-center justify-between p-3">
-        <div className="flex items-center space-x-2">
-          <Image
-            src="/chad.png"
-            alt="Sigma Chat Terminal"
-            width={32}
-            height={32}
-          />
-          <span className="font-medium">Sigma Chat Terminal</span>
-          <Eye className="w-4 h-4" />
+      <div className="text-muted-foreground text-sm">
+          System: AI Quant powered by tailored cutting-edge models
+          <br />
+          Status: Ready for input
         </div>
       </div>
 
       {/* Chat Messages Area */}
       <div className="flex-1 overflow-y-auto p-4 font-mono text-sm space-y-4">
-        <div className="text-muted-foreground">
-          System: AI Quant powered by tailored cutting-edge models
-          <br />
-          Status: Ready for input
-        </div>
+
 
         {/* Messages */}
         {messages.map((message, index) => (
@@ -179,9 +185,22 @@ export default function ChatPage() {
         ))}
 
         {/* Typing Effect Message */}
-        {currentTypingMessage && (
-          <div className="whitespace-pre-wrap">{currentTypingMessage}</div>
-        )}
+        {
+          isLoading ? (
+            <div className="whitespace-pre-wrap">
+              <Image
+                src="/sentient.png"
+                alt="Typing..."
+                width={20}
+                height={20}
+                className="animate-spin animate-infinite animate-ease-in-out"
+                />
+            </div>
+          ) :
+          currentTypingMessage && (
+            <div className="whitespace-pre-wrap">{currentTypingMessage}</div>
+          )
+        }
         {error && <div className="text-destructive">Error: {error}</div>}
         {/* Scroll to bottom anchor */}
         <div ref={messagesEndRef} />

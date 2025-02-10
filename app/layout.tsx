@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 // import localFont from "next/font/local";
 import { IBM_Plex_Mono} from 'next/font/google'
 import "./globals.css";
+import Image from "next/image"
 
 
 
@@ -51,13 +52,26 @@ export default function RootLayout({
       <body className={`${ibm.className} antialiased font-doto min-h-screen flex flex-col w-full`}>
         
           <header className="border-b bg-gray-100 w-full">
-            <div className=" flex items-center justify-between h-full w-full">
-              <nav className="flex">
+            <div className="px-2 flex items-center justify-between h-full w-full">
+              <nav className="flex justify-between w-full items-center">
+                <div className="flex items-center gap-2">
+                <Image
+                  src="/sentient.png"
+                  alt="SentientAI"
+                  width={32}
+                  height={32}
+                  className="object-contain h-10"
+                />
+                <h1 className="text-xl font-">SentientAI</h1>
+                </div>
+                <div className="flex items-center gap-2">
                 <NavLink href="/">Chat</NavLink>
                 <NavLink href="/strategies">Strategies</NavLink>
                 <NavLink href="/settings">Settings</NavLink>
+                </div>
+                <ConnectButton />
               </nav>
-              <ConnectButton />
+              
             </div>
           </header>
           <main className="flex-1 h-full py-6 ">{children}</main>
