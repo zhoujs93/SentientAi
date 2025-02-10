@@ -70,6 +70,7 @@ export default function ChatPage() {
     setIsLoading(true)
     setError(null)
     const walletAddress = wallet?.account?.address
+    console.log("USDC Balance:", usdcBalance)
     const userInput = 
     `
     USER WALLET STATUS: ${walletAddress ? "CONNECTED" : "NOT CONNECTED"}
