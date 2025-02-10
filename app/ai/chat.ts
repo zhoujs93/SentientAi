@@ -21,7 +21,7 @@ const startCompletion: (props: StartCompletionProps) => Promise<any> = async ({ 
         })
     const obj: any = {
         // model: "meta-llama/Llama-3.3-70B-Instruct", // Changed from gpt-4o to gpt-4
-        model: "gpt-4o-mini",
+        model: "gpt-4o",
         
         messages: messages,
         tool_choice: "auto", 
