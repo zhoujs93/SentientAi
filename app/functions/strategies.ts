@@ -31,7 +31,7 @@ class Strategies {
                 stop_loss: stopLossThreshold,
             }
             console.log("Request body:", reqBody, strategyId);
-            const startStrat = await axios.post("http://34.69.234.196:9001/run-strategy", reqBody);
+            const startStrat = await axios.post("http://34.130.61.46:9001/run-strategy", reqBody);
             return {
                 message: startStrat.data.message,
                 // privateKey: walletPrivateKey,
