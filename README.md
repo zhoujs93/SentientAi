@@ -43,7 +43,7 @@ L =
 $$
 
 Where:  
-- \(P_0\) is the initial price,  
+- $\(P_0\)$ is the initial price,  
 - \(P_t\) is the price at time \(t\),  
 - \(\theta\) is a threshold percentage.
 
