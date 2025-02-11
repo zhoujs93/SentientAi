@@ -3,7 +3,7 @@ layout: default
 title: Ethereum Futures Signal Strategy
 ---
 
-# Sentient AI
+# Sentient.ai
 
 This repository contains the implementation of a proprietary signal-based trading strategy designed to trade Ethereum futures. The strategy leverages advanced machine learning techniques to generate trading signals (long, short, or neutral) based on historical market data. Although the precise target label remains proprietary, the model uses an adapted version of the triple barrier labeling method to capture price dynamics.
 
