@@ -10,6 +10,7 @@ This repository contains the implementation of a proprietary signal-based tradin
 ## Table of Contents
 
 - [Overview](#overview)
+- [Agent Introduction](#agent-introduction)
 - [Strategy Details](#strategy-details)
 - [Modeling Approach](#modeling-approach)
 - [Technical Background](#technical-background)
@@ -22,7 +23,9 @@ This repository contains the implementation of a proprietary signal-based tradin
 The strategy is designed to forecast trading signals for Ethereum futures. By framing the problem as a multi-class classification task, the model determines whether to take a **long**, **short**, or **neutral** position. The signal generation is based on a sophisticated feature engineering process combined with a gradient boosting model (using LightGBM).
 
 > **Note:**  
-> For proprietary reasons, the specific target label (the class the model is predicting) is not disclosed. However, the labeling process is based on an adapted triple barrier method.
+> For proprietary reasons, the specific target label (the class the model is predicting) is not disclosed. However, the labeling process is based on an adapted  > triple barrier method. It should be noted that for the purposes of keeping our model confidential and the backend such as the feature generation, model training, and all the other code, we have decided not to publish it due to the confidentiality of our strategy.
+
+
 
 ## Strategy Details
 
@@ -106,7 +109,3 @@ Where:
 ## Backtest Performance
 
 Out-of-sample backtests conducted from **October 2024 to January 2025** have shown promising results, with cumulative returns exceeding **50%**. These results underscore the robustness of the model in varying market conditions.
-
-
-## Note about the Repo
-It should be noted that for the purposes of keeping our model confidential and the backend such as the feature generation, model training, and all the other code, we have decided not to publish it due to the confidentiality of our strategy.
