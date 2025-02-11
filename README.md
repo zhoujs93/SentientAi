@@ -43,14 +43,14 @@ L =
 $$
 
 Where:  
-- $\(P_0\)$ is the initial price,  
-- \(P_t\) is the price at time \(t\),  
-- \(\theta\) is a threshold percentage.
+- $P_0$ is the initial price,  
+- $P_t$ is the price at time \(t\),  
+- $\theta$ is a threshold percentage.
 
 Where:  
-- \( P_0 \) is the initial price,  
-- \( P_t \) is the price at time \( t \),  
-- \( \theta \) is a threshold percentage.
+- $P_0$ is the initial price,  
+- $P_t$ is the price at time $t$,  
+- $\theta$ is a threshold percentage.
 
 
 
@@ -65,16 +65,16 @@ We use **LightGBM**, a powerful gradient boosting framework, to build our model.
 
 ### Gradient Boosting with LightGBM
 
-The LightGBM model builds an additive model of weak learners (decision trees). At each iteration \( m \), the model is updated as:
+The LightGBM model builds an additive model of weak learners (decision trees). At each iteration $m$, the model is updated as:
 
 $$
 F_m(x) = F_{m-1}(x) + \nu \cdot h_m(x)
 $$
 
 Where:
-- \(F_m(x)\) is the model prediction after \(m\) iterations,
-- \(h_m(x)\) is the new weak learner added at iteration \(m\),
-- \(\nu\) is the learning rate.
+- $F_m(x)$ is the model prediction after $m$ iterations,
+- $h_m(x)$ is the new weak learner added at iteration $m$,
+- $\nu$ is the learning rate.
 
 #### Loss Function
 
@@ -85,8 +85,8 @@ $$
 $$
 
 Where:
-- \( y_{i,k} \) is an indicator (0 or 1) of whether sample \( i \) belongs to class \( k \),
-- \( p_{i,k} \) is the predicted probability for class \( k \).
+- $y_{i,k}$ is an indicator (0 or 1) of whether sample $i$ belongs to class $k$,
+- $p_{i,k}$ is the predicted probability for class $k$.
 
 #### Regularization
 
@@ -97,10 +97,14 @@ $$
 $$
 
 Where:
-- \( T \) is the number of leaves in the tree,
-- \( w_j \) are the leaf weights,
-- \( \gamma \) and \( \lambda \) are regularization parameters.
+- $T$ is the number of leaves in the tree,
+- $w_j$ are the leaf weights,
+- $\gamma$ and $\lambda$ are regularization parameters.
 
 ## Backtest Performance
 
 Out-of-sample backtests conducted from **October 2024 to January 2025** have shown promising results, with cumulative returns exceeding **50%**. These results underscore the robustness of the model in varying market conditions.
+
+
+## Note about the Repo
+It should be noted that for the purposes of keeping our model confidential and the backend such as the feature generation, model training, and all the other code, we have decided not to publish it due to the confidentiality of our strategy.
