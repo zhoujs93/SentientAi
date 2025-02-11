@@ -7,7 +7,7 @@ title: Ethereum Futures Signal Strategy
 
 Welcome to Sentient.ai—where cutting-edge artificial intelligence meets the power of decentralized finance on the Sui blockchain.
 
-At Sentient.ai, we've reimagined trading by combining advanced AI agents with robust quantitative strategies. Simply deposit your funds into our secure vault, and let our intelligent system execute precision trades on your behalf. Our platform is designed for both seasoned traders and newcomers, offering a transparent, efficient, and automated trading experience that adapts in real-time to market dynamics.
+At Sentient.ai, we've reimagined trading by combining advanced AI agents with robust quantitative strategies. Our vision is to allow users to have access to a decentralized version of a trading vault to access complex quantitative strategies by interacting with our trading agent. Simply deposit your funds into our secure vault, and let our intelligent system execute precision trades on your behalf. Our platform is designed for both seasoned traders and newcomers, offering a transparent, efficient, and automated trading experience that adapts in real-time to market dynamics.
 
 ## Table of Contents
 
