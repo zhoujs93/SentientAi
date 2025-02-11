@@ -32,7 +32,7 @@ The strategy is designed to forecast trading signals for Ethereum futures. By fr
 - **Market:** Ethereum futures  
 - **Signal Types:** Long, Short, Neutral  
 - **Labeling Method:** An adapted version of the triple barrier labeling method  
-- **Backtest Results:** Out-of-sample backtests (October 2024 – January 2025) have generated returns in excess of 50%.
+- **Backtest Results:** Out-of-sample backtests (October 2024 – January 2025) have generated returns in excess of 50%. This is based on the best performing insample parameter from Jan 2023 - June 2024.
 
 ### Triple Barrier Labeling
 
