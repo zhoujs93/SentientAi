@@ -17,8 +17,6 @@ At Sentient.ai, we've reimagined trading by combining advanced AI agents with ro
 - [Modeling Approach](#modeling-approach)
 - [Technical Background](#technical-background)
 - [Backtest Performance](#backtest-performance)
-- [Installation and Usage](#installation-and-usage)
-- [License](#license)
 
 ## Overview
 
