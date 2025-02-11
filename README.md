@@ -30,6 +30,7 @@ The strategy is designed to forecast trading signals for Ethereum futures. By fr
 
 The triple barrier method uses three barriers to define the outcome of a trade: an upper barrier, a lower barrier, and a time barrier. In our adaptation, the label \( L \) is determined as follows:
 
+$$
 \[
 L =
 \begin{cases}
@@ -38,7 +39,7 @@ L =
 0 & \text{otherwise, or if the time barrier is reached}
 \end{cases}
 \]
-
+$$
 Where:  
 - \( P_0 \) is the initial price,  
 - \( P_t \) is the price at time \( t \),  
