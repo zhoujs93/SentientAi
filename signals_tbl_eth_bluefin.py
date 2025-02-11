@@ -476,7 +476,7 @@ def parse_strategy_args():
     parser.add_argument(
         '--privateKey',
         type=str,
-        default='antique interest nerve mask sentence hour radar melt other limb pear flash',
+        required=True,
         help='Private key for the API (e.g., the seed phrase)'
     )
     parser.add_argument(
