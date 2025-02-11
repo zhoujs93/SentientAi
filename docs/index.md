@@ -33,7 +33,7 @@ The strategy is designed to forecast trading signals for Ethereum futures. By fr
 
 ### Triple Barrier Labeling
 
-The triple barrier method uses three barriers to define the outcome of a trade: an upper barrier, a lower barrier, and a time barrier. In our adaptation, the label \( L \) is determined as follows:
+The triple barrier method uses three barriers to define the outcome of a trade: an upper barrier, a lower barrier, and a time barrier. In our adaptation, the label \(L\) is determined as follows:
 
 $$
 L =
@@ -45,9 +45,16 @@ L =
 $$
 
 Where:  
+- \(P_0\) is the initial price,  
+- \(P_t\) is the price at time \(t\),  
+- \(\theta\) is a threshold percentage.
+
+Where:  
 - \( P_0 \) is the initial price,  
 - \( P_t \) is the price at time \( t \),  
 - \( \theta \) is a threshold percentage.
+
+
 
 ## Modeling Approach
 
@@ -62,22 +69,22 @@ We use **LightGBM**, a powerful gradient boosting framework, to build our model.
 
 The LightGBM model builds an additive model of weak learners (decision trees). At each iteration \( m \), the model is updated as:
 
-\[
+$$
 F_m(x) = F_{m-1}(x) + \nu \cdot h_m(x)
-\]
+$$
 
 Where:
-- \( F_m(x) \) is the model prediction after \( m \) iterations,
-- \( h_m(x) \) is the new weak learner added at iteration \( m \),
-- \( \nu \) is the learning rate.
+- \(F_m(x)\) is the model prediction after \(m\) iterations,
+- \(h_m(x)\) is the new weak learner added at iteration \(m\),
+- \(\nu\) is the learning rate.
 
 #### Loss Function
 
 The multi-class log-loss function, which the model minimizes, is given by:
 
-\[
+$$
 \mathcal{L} = -\sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(p_{i,k})
-\]
+$$
 
 Where:
 - \( y_{i,k} \) is an indicator (0 or 1) of whether sample \( i \) belongs to class \( k \),
@@ -87,9 +94,9 @@ Where:
 
 LightGBM applies regularization to prevent overfitting:
 
-\[
+$$
 \Omega(f) = \gamma T + \frac{1}{2} \lambda \sum_{j=1}^{T} w_j^2
-\]
+$$
 
 Where:
 - \( T \) is the number of leaves in the tree,
